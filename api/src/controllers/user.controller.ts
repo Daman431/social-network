@@ -38,7 +38,7 @@ const findUser = async (req: Request, res: Response) => {
 }
 
 const editUser = (req: Request, res: Response) => {
-    res.send("Working!")
+    res.send("Request Working!")
 }
 
 
