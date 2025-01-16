@@ -7,4 +7,5 @@ export interface IButtonProps {
     type: ButtonType
     className?: string
     onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+    backgroundColor?: string
 }
