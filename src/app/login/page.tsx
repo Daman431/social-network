@@ -4,6 +4,7 @@ import TextField from "@/components/TextField/TextField";
 import { loginUrl } from "@/constants/api-urls";
 import { POST } from "@/service/web-service";
 import { NextPage } from "next";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface ILoginForm {
@@ -11,6 +12,7 @@ interface ILoginForm {
     password: string
 }
 const LoginPage: NextPage = () => {
+    const router = useRouter();
     const defaultLoginForm: ILoginForm = {
         password: '',
         username: ''
@@ -25,6 +27,7 @@ const LoginPage: NextPage = () => {
     const login = () => {
         POST<ILoginForm, any>(loginUrl, loginForm).then(res => {
             alert(res.data.isSuccessful ? "Login Successful" : 'Login failed')
+            router.push("/home")
         }).catch(e => {
             alert(e.message)
         })
