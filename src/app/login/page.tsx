@@ -1,16 +1,21 @@
-'use client'
+"use client"
 import Button from "@/components/Button/Button";
 import TextField from "@/components/TextField/TextField";
 import { loginUrl } from "@/constants/api-urls";
 import { POST } from "@/service/web-service";
+import { LoginRequest } from "@/types/request/Login";
+import { Response } from "@/types/response";
+import { LoginResponse } from "@/types/response/Login";
 import { NextPage } from "next";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-interface ILoginForm {
+export interface ILoginForm {
     username: string;
     password: string
 }
 const LoginPage: NextPage = () => {
+    const router = useRouter();
     const defaultLoginForm: ILoginForm = {
         password: '',
         username: ''
@@ -23,8 +28,8 @@ const LoginPage: NextPage = () => {
         });
     }
     const login = () => {
-        POST<ILoginForm, any>(loginUrl, loginForm).then(res => {
-            alert(res.data.isSuccessful ? "Login Successful" : 'Login failed')
+        POST<LoginRequest, Response<LoginResponse>>(loginUrl, loginForm, { withCredentials: true }).then(res => {
+            router.push("/home")
         }).catch(e => {
             alert(e.message)
         })
