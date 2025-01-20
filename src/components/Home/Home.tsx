@@ -8,3 +8,5 @@ const Home: FC<HomeProps> = () => {
         </h1>
     </div>
 }
+
+export default Home;

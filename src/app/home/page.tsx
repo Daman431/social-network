@@ -1,8 +1,9 @@
+import Home from "@/components/Home/Home";
 import { NextPage } from "next";
 
 const HomePage:NextPage = () => {
     return <>
-    home!
+    <Home />
     </>
 }
 

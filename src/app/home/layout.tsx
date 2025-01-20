@@ -1,3 +1,4 @@
+import Header from "@/components/Header/Header"
 import Layout from "@/components/Layout/Layout"
 import { ReactNode } from "react"
 
@@ -6,6 +7,7 @@ interface HomeLayoutProps {
 }
 const HomeLayout = ({ children }: HomeLayoutProps) => {
     return <Layout>
+        <Header />
         {children}
     </Layout>
 }
