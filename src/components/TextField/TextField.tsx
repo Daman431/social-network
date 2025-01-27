@@ -24,8 +24,13 @@ const TextField: FC<TextFieldProps> = ({ name, onChange, type = "text", classNam
         />
         {
             type == "password" &&
-            <Button onClick={switchType} type="Primary" className="border-none bg-transparent">
-                {inputType == "password" ? "Show" : "Hide"}
+            <Button onClick={switchType} type="Primary" className="border-none bg-white px-2 py-0">
+                {
+                    inputType == "password" ?
+                        <img src="/icons/eye-solid.svg" className="w-6 h-6" />
+                        :
+                        <img src="/icons/eye-slash-solid.svg" className="w-6 h-6" />
+                }
             </Button>
         }
     </div>
