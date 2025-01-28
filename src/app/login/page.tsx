@@ -3,12 +3,14 @@ import Button from "@/components/Button/Button";
 import TextField from "@/components/TextField/TextField";
 import { loginUrl } from "@/constants/api-urls";
 import { POST } from "@/service/web-service";
+import { setAuthenticated } from "@/store/reducers/authentication.reducer";
 import { LoginRequest } from "@/types/request/Login";
 import { Response } from "@/types/response";
 import { LoginResponse } from "@/types/response/Login";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export interface ILoginForm {
     username: string;
@@ -20,6 +22,7 @@ const LoginPage: NextPage = () => {
         password: '',
         username: ''
     }
+    const dispatch = useDispatch()
     const [loginForm, setLoginForm] = useState(defaultLoginForm);
     const onFormChange = (name: keyof ILoginForm, value: string) => {
         setLoginForm({
@@ -29,7 +32,11 @@ const LoginPage: NextPage = () => {
     }
     const login = () => {
         POST<LoginRequest, Response<LoginResponse>>(loginUrl, loginForm, { withCredentials: true }).then(res => {
-            router.push("/home")
+            if (res.data.data.userName) {
+                router.push("/home");
+                dispatch(setAuthenticated(true))
+            }
+            else throw "Login Unsuccessful";
         }).catch(e => {
             alert(e.message)
         })
