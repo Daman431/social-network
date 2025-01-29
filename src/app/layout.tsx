@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppStore } from "@/store/store";
 import { Provider } from "react-redux";
+import AuthGuard from "@/components/AuthGuard/AuthGuard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Provider store={AppStore}>
+          <AuthGuard />
           {children}
         </Provider>
       </body>
