@@ -2,10 +2,17 @@
 
 import Button from "@/components/Button/Button";
 import TextField from "@/components/TextField/TextField";
+import { signUpUrl } from "@/constants/api-urls";
+import { POST } from "@/service/web-service";
+import { setAuthenticated } from "@/store/reducers/authentication.reducer";
+import { SignUpRequest } from "@/types/request/Signup";
+import { Response } from "@/types/response";
 import { NextPage } from "next";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-interface ISignupForm {
+export interface ISignupForm {
     firstName: string
     lastName: string
     password: string
@@ -27,6 +34,8 @@ const SignupPage: NextPage = () => {
         status: '',
         username: ''
     }
+    const router = useRouter();
+    const dispatch = useDispatch();
     const [signupForm, setSignupForm] = useState<ISignupForm>(initialSignupForm);
     const onFormChange = (name: keyof ISignupForm, value: string) => {
         setSignupForm({
@@ -35,7 +44,15 @@ const SignupPage: NextPage = () => {
         });
     }
     const signIn = () => {
-
+        POST<SignUpRequest, Response<any>>(signUpUrl, signupForm, { withCredentials: true }).then(res => {
+            if (res.data.data.userName) {
+                router.push("/home");
+                dispatch(setAuthenticated(true))
+            }
+            else throw "Login Unsuccessful";
+        }).catch(e => {
+            alert(e.message)
+        })
     }
     return <div className="h-screen w-full flex justify-center items-center" >
         <div className="py-2 px-1 flex flex-col space-y-2 rounded-md">
