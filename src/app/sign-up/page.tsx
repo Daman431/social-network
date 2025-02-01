@@ -7,6 +7,7 @@ import { POST } from "@/service/web-service";
 import { setAuthenticated } from "@/store/reducers/authentication.reducer";
 import { SignUpRequest } from "@/types/request/Signup";
 import { Response } from "@/types/response";
+import { SignUpResponse } from "@/types/response/SignUp";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -44,8 +45,8 @@ const SignupPage: NextPage = () => {
         });
     }
     const signIn = () => {
-        POST<SignUpRequest, Response<any>>(signUpUrl, signupForm, { withCredentials: true }).then(res => {
-            if (res.data.data.userName) {
+        POST<SignUpRequest, Response<SignUpResponse>>(signUpUrl, signupForm, { withCredentials: true }).then(res => {
+            if (res.data.data.username) {
                 router.push("/home");
                 dispatch(setAuthenticated(true))
             }
