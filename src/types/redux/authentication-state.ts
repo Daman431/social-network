@@ -1,3 +1,7 @@
-export interface IAuthenticationState {
+export interface IAuthenticationType {
     isAuthenticated: boolean;
+}
+
+export interface IAuthenticationState{
+    authentication: IAuthenticationType
 }

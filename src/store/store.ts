@@ -1,5 +1,9 @@
-import { createStoreHook } from "react-redux";
+import { configureStore } from '@reduxjs/toolkit'
+import authenticationReducer from './reducers/authentication.reducer'
 
-const store = createStoreHook()
 
-export default store;
+export const AppStore =  configureStore({
+    reducer: {
+        authentication: authenticationReducer
+    }
+})

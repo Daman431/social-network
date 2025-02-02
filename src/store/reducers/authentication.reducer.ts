@@ -1,15 +1,21 @@
-import { IReduxAction } from "@/types/redux/action";
-import { IAuthenticationState } from "@/types/redux/authentication-state";
+import { IAuthenticationType } from "@/types/redux/authentication-state";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 
-const initialState: IAuthenticationState = {
+const initialState: IAuthenticationType = {
     isAuthenticated: false
 }
 
-const authenticationReducer = (state = initialState, action: IReduxAction): IAuthenticationState => {
-    switch (action.type) {
-        case "update-authenticated": return { ...state, isAuthenticated: action.payload }
-    }
-    return state;
-}
 
-export default authenticationReducer;
+const AuthenticationSlice = createSlice({
+    initialState: initialState,
+    name: 'Authentication',
+    reducers: {
+        setAuthenticated: (state, action) => {
+            state.isAuthenticated = action.payload;
+        }
+    }
+})
+
+export default AuthenticationSlice.reducer;
+
+export const { setAuthenticated } = AuthenticationSlice.actions;
