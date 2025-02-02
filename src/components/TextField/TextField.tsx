@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import TextFieldProps, { TextFieldType } from "./TextFieldProps";
 import Button from "../Button/Button";
 
-const TextField: FC<TextFieldProps> = ({ name, onChange, type = "text", className, value }) => {
+const TextField: FC<TextFieldProps> = ({ name, onChange, type = "text", className, value, showNameAsPlaceholder = false }) => {
     const defaultClass = "border-0 outline-none h-full w-full p-2";
     const conatinerClass = "";
     const [inputType, setType] = useState<TextFieldType>(type);
@@ -21,6 +21,7 @@ const TextField: FC<TextFieldProps> = ({ name, onChange, type = "text", classNam
             name={name}
             className={`${className} ${defaultClass}`}
             value={value}
+            placeholder={showNameAsPlaceholder ? name : ''}
         />
         {
             type == "password" &&

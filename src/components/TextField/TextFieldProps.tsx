@@ -8,6 +8,7 @@ interface TextFieldProps {
     type?: TextFieldType
     className?: string
     value: string | number
+    showNameAsPlaceholder?: boolean
 }
 
 export default TextFieldProps;
