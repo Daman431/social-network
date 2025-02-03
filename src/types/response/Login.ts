@@ -3,7 +3,7 @@ export interface LoginResponse {
     firstName: string
     email: string
     mobile: string
-    userName: string
+    username: string
     lastName: string
     gender: string
     status: string

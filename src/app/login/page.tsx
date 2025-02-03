@@ -32,7 +32,8 @@ const LoginPage: NextPage = () => {
     }
     const login = () => {
         POST<LoginRequest, Response<LoginResponse>>(loginUrl, loginForm, { withCredentials: true }).then(res => {
-            if (res.data.data.userName) {
+            console.log(res)
+            if (res.data.data.username) {
                 router.push("/home");
                 dispatch(setAuthenticated(true))
             }
